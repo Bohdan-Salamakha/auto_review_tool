@@ -4,15 +4,11 @@ AutoReviewTool is a library for code review using FastAPI.
 
 It includes the ability to launch a server to handle requests.
 
-## **Installation**
-
-Make sure Python version 3.13 or higher is installed on your system.
-
 ## **Environment variables**
 
 For AutoReviewTool to work, you need to set up environment variables:
 
-Create a .env file in the root of the project, similar to .env.sample
+Create an `.env` file in the root of the project, similar to .env.sample
 and put your environment variables there:
 
 1. GITHUB_TOKEN
@@ -34,17 +30,42 @@ and put your environment variables there:
 `REDIS_URL=redis://localhost:6379/0`
 * If REDIS_URL is not specified or the connection fails, the application will continue to run without Redis, but caching will be disabled.
 
-## **Starting the server**
+## **Starting the server using a Docker (Option 1)**
 
-After installing the server, you can start the FastAPI server with the command:
+1. Make sure you have Docker and Docker Compose installed.
+2. Open a terminal and navigate to the project folder.
+3. Run Docker Compose:
 
-```uvicorn auto_review_tool.main:app --reload```
+`docker compose up`
+
+4. Access the application:
+
+`http://localhost:8000`
+
+## **Starting the server using virtual environment (Option 2)**
+
+Make sure Python version 3.13 or higher is installed on your system.
+
+Install required libs into your virtual environment 
+(it's better to use poetry)
+
+1. Install poetry if it's not installed
+
+`pip install poetry`
+
+2. Install required libs
+
+`poetry install`
+
+After installing libs, you can start the FastAPI server with the command:
+
+```poetry run uvicorn auto_review_tool.main:app --reload```
 
 to run server in the development mode
 
 or
 
-```uvicorn auto_review_tool.main:app --host 0.0.0.0 --port 8000 --workers 4```
+```poetry run uvicorn auto_review_tool.main:app --host 0.0.0.0 --port 8000 --workers 4```
 
 to run server in the production mode
 
@@ -92,20 +113,6 @@ Default: False
 Example:
 
 `auto-review-tool runprod --reload`
-
-### **Running a Docker Project Locally**
-
-1. Make sure you have Docker and Docker Compose installed.
-2. Open a terminal and navigate to the project folder.
-3. Run Docker Compose:
-
-`docker-compose up --build`
-4. Access the application:
-
-`http://localhost:8000`
-5. Shutdown:
-
-`docker-compose down`
 
 ## **API Documentation**
 
@@ -229,7 +236,7 @@ One microservice can handle requests, another — only work with OpenAI, the thi
 
 This will not only simplify the support of the system, but also allow each part to be scaled independently.
 
-# How my project evaluated itself 
+# How the project evaluated itself ?
 
 ## Downsides/Comments:
 1. **Code Structure and Modularity:**
