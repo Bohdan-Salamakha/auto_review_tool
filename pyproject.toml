@@ -1,0 +1,60 @@
+[tool.poetry]
+name = "auto-review-tool"
+version = "0.1.0"
+description = ""
+authors = ["Bohdan Salamakha <allen.avanheim@gmail.com>"]
+packages = [{include = "auto_review_tool"}]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.13"
+fastapi = "^0.115.6"
+uvicorn = "^0.34.0"
+httpx = "^0.28.1"
+python-dotenv = "^1.0.1"
+openai = "^1.58.1"
+redis = "^5.2.1"
+
+
+[tool.poetry.dev-dependencies]
+pytest = "^8.3.4"
+pytest-asyncio = "^0.25.0"
+pytest-cov = "^6.0.0"
+flake8 = "^7.1.1"
+flake8-annotations = "^3.1.1"
+flake8-bandit = "^4.1.1"
+flake8-isort = "^6.1.1"
+flake8-bugbear = "^24.10.31"
+black = "^24.10.0"
+isort = "5.13.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+auto-review-tool = "auto_review_tool.cli:cli"
+
+[tool.black]
+line-length = 88
+exclude = '''
+/(
+    \.git
+  | \.mypy_cache
+  | \.venv
+  | migrations
+  | __pycache__
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+py_version = 312
+profile = "black"
+line_length = 88
+combine_as_imports = true
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+multi_line_output = 3

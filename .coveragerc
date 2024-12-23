@@ -1,0 +1,5 @@
+[run]
+omit =
+    auto_review_tool/cli.py
+    auto_review_tool/core/redis_client.py
+    auto_review_tool/__init__.py

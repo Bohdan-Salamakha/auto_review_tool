@@ -1,0 +1,29 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - redis
+    ports:
+      - "8000:8000"
+
+  redis:
+    image: redis:7.4.1
+    container_name: redis_instance
+    ports:
+      - "6379:6379"
+    restart: always
+    command: [ "redis-server", "--appendonly", "yes" ]
+    volumes:
+      - redis_data:/data
+
+volumes:
+  redis_data:
+    driver: local
